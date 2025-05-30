@@ -1,0 +1,11 @@
+version: '3.8'
+
+services:
+
+  erp-queue:
+    build: .
+    image: erp-queue
+    container_name: ERPQueue
+    network_mode: host
+    restart: always
+    mem_limit: 512m
