@@ -13,6 +13,8 @@ import reactor.core.publisher.Mono;
 @RestController
 public class QeueController {
 
+    private String secret =  "23HJ9DF9238JRJ893289R4-54G3484TR43287R423R732R423D743214D1QWD";
+
     private final QeueService qeueService;
 
     public QeueController(QeueService qeueService) {
@@ -21,6 +23,10 @@ public class QeueController {
 
     @RequestMapping("/**")
     public Mono<ResponseEntity<JsonNode>> proxyRequest(HttpServletRequest request, @RequestBody(required = false) Mono<String> bodyMono) {
+        String providedSecret = request.getHeader("secret");
+        if (providedSecret == null || !providedSecret.equals(secret)) {
+            return Mono.just(ResponseEntity.status(403).body(null)); // 403 Forbidden
+        }
         return qeueService.enqueue(request, bodyMono);
     }
 }
