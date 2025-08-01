@@ -38,7 +38,7 @@ public class QeueService {
             .build();;
     private final String TARGET_BASE = "https://integrador.varejonline.com.br";
     private final ObjectMapper mapper = new ObjectMapper();
-    private static final int delay = 5000;//em ms
+    private static final int delay = 1000;//em ms
 
 
     public Mono<ResponseEntity<JsonNode>> enqueue(HttpServletRequest req, Mono<String> bodyMono) {
